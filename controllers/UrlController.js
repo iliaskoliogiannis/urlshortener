@@ -13,7 +13,7 @@ const index = (req, res) => {
 
 const get = async (req, res) => {
 
-    const fullUrl = await client.get(req.params.url);
+    const fullUrl = await client.get(process.env.URL + req.params.url);
     if (!fullUrl) {
         return res.render("index", {
             success: false,

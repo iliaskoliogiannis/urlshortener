@@ -1,30 +1,50 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <title>url shortener IO</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/united/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js"></script>
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="https://unpkg.com/tippy.js@6"></script>
 </head>
+<style>
+    .alert-success strong {
+        cursor: pointer;
+    }
+</style>
 <body>
 <div class="container mt-5 pl-5 pr-5">
-    <form action="/" method="post">
-        <fieldset>
-            <div class="form-group">
-                <label class="col-form-label col-form-label-lg" for="inputLarge"><%=message%></label>
-                <input class="form-control form-control-lg" type="text" placeholder="paste your url here..." id="inputLarge" name="url">
-            </div>
-            <button type="submit" class="btn btn-primary">shorten!</button>
-        </fieldset>
-    </form>
-    <% if (url !== null && success ) { %>
-    <div class="alert alert-dismissible alert-success">
-        <strong><%=url%></strong>
+    <div class="row">
+        <form class="col-12 mb-3" action="/" method="post">
+            <fieldset>
+                <div class="form-group">
+                    <label class="col-form-label col-form-label-lg" for="inputLarge"><%=message%></label>
+                    <input class="form-control form-control-lg" type="text" placeholder="paste your url here..." id="inputLarge" name="url">
+                </div>
+                <button type="submit" class="btn btn-primary">shorten!</button>
+            </fieldset>
+        </form>
     </div>
-    <% } %>
-    <% if (!success) { %>
-    <div class="alert alert-dismissible alert-danger">
-        <strong><%=url%></strong>
+    <div class="row">
+        <% if (url !== null && success ) { %>
+        <div class="col-12 alert alert-dismissible alert-success" data-clipboard-target=".alert">
+            <strong><%=url%></strong>
+        </div>
+        <% } %>
+        <% if (!success) { %>
+        <div class="col-12 alert alert-dismissible alert-danger" data-clipboard-target=".alert">
+            <strong><%=url%></strong>
+        </div>
+        <% } %>
     </div>
-    <% } %>
 </div>
 
+    <script>
+        tippy('.alert-success strong', {
+            content: 'copy to clipboard',
+            placement: 'bottom'
+        });
+        new ClipboardJS('.alert-success');
+    </script>
 </body>
 </html>
