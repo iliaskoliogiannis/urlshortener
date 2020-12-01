@@ -14,12 +14,12 @@
             <button type="submit" class="btn btn-primary">shorten!</button>
         </fieldset>
     </form>
-    <% if (url !== null && success === true) { %>
+    <% if (url !== null && success ) { %>
     <div class="alert alert-dismissible alert-success">
         <strong><%=url%></strong>
     </div>
     <% } %>
-    <% if (success === false) { %>
+    <% if (!success) { %>
     <div class="alert alert-dismissible alert-danger">
         <strong><%=url%></strong>
     </div>
